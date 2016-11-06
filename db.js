@@ -10,9 +10,22 @@ var db = {
             name: imageName,
             data: data,
             content_type: contentType
-        }], randomString.generate(), function (err, body) {
+        }], randomString.generate(), function (err, data) {
             if (!err) {
-                def.resolve(body)
+                def.resolve(data)
+            }
+            else {
+                log.error("Error : " + err);
+                def.reject(err);
+            }
+        });
+        return def.promise
+    },
+    insertBulkDocs: function (docs) {
+        var def = Q.defer();
+        nano.use("test").bulk(docs, function (err, data) {
+            if (!err) {
+                def.resolve(data);
             }
             else {
                 log.error(err);

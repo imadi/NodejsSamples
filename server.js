@@ -12,19 +12,34 @@ app.use(bodyParser.json({limit: '10mb'}));
 app.get("/", function (req, res) {
     res.send("Hello World");
 });
+
 app.listen("8081", function () {
     var host = this.address().address;
     var port = this.address().port;
     log.info("Running at http://" + host + port);
 });
 
-
 app.post("/uploadImageToCouch", function (req, res) {
     var imageName = randomString.generate(7) + ".png";
     var data = new Buffer(req.body.imageData, 'base64');
-    db.insertMultipart({foo: 'bar'}, imageName, data, 'image/png').then(function (succ) {
-        res.send(succ).end();
+    db.insertMultipart({foo: 'bar'}, imageName, data, 'image/png').then(function (response) {
+        res.send(response).end();
     }, function (error) {
-        res.status(500).send("Could not fetch AirFiProfile. Please try again later.").end();
+        res.status(500).send(error).end();
+    });
+});
+
+/*
+ Sample docs structure
+ "docs": [{
+ "_id": "adithya:" + randomString.generate(),
+ "name": "adithya"
+ }, {"_id": "vamsi:" + randomString.generate(), "name": "vamsi"}]*/
+app.post("/uploadBulk", function (req, res) {
+    var docs = req.body;
+    db.insertBulkDocs(docs).then(function (response) {
+        res.send(response).end();
+    }, function (error) {
+        res.status(500).send(error).end();
     });
 });
