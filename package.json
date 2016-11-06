@@ -1,0 +1,26 @@
+{
+  "name": "nodejssamples",
+  "version": "1.0.0",
+  "description": "NodejsSamples",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/imadi/NodejsSamples.git"
+  },
+  "author": "Adithya",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/imadi/NodejsSamples/issues"
+  },
+  "homepage": "https://github.com/imadi/NodejsSamples#readme",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "nano": "^6.2.0",
+    "q": "^1.4.1",
+    "randomstring": "^1.1.5"
+  }
+}
