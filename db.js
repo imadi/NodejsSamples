@@ -4,11 +4,9 @@ var randomString = require("randomstring");
 var Q = require('q');
 
 var db = {
-    insertMultipart: function (json, imageName, data, contentType) {
+    insertMultipart: function (doc, imageName, data, contentType) {
         var def = Q.defer();
-        var doc = nano.use('test');
-        var response = "est"
-        doc.multipart.insert(json, [{
+        nano.use('test').multipart.insert(doc, [{
             name: imageName,
             data: data,
             content_type: contentType
